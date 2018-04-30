@@ -1,0 +1,3 @@
+#define SIMUL_UE412_OLD_DEFS
+#define SIMUL_BINARY_PLUGIN 1
+

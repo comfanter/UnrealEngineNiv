@@ -41,6 +41,15 @@ public abstract class BaseWinPlatform : Platform
         SC.StageFiles(StagedFileType.NonUFS, DirectoryReference.Combine(SC.LocalRoot, "Engine/Binaries/ThirdParty/GameWorks/GFSDK_SSAO"), "*.dll", StageFilesSearch.TopDirectoryOnly);
         // NVCHANGE_END: Add HBAO+
 
+        /// BEGIN trueSKY Additional code
+        SC.StageFiles(StagedFileType.NonUFS, DirectoryReference.Combine(SC.LocalRoot, "Engine/Binaries/ThirdParty/Simul", SC.PlatformDir), "TrueSkyPluginRender_MT.dll", StageFilesSearch.TopDirectoryOnly);
+        if (!SC.StageTargetConfigurations.Contains(UnrealTargetConfiguration.Shipping))
+            SC.StageFiles(StagedFileType.NonUFS, DirectoryReference.Combine(SC.LocalRoot, "Engine/Binaries/ThirdParty/Simul", SC.PlatformDir), "TrueSkyPluginRender_MT.pdb", StageFilesSearch.TopDirectoryOnly);
+        SC.StageFiles(StagedFileType.NonUFS, DirectoryReference.Combine(SC.LocalRoot, "Engine/Plugins/TrueSkyPlugin/Resources"), "*.*", StageFilesSearch.TopDirectoryOnly);
+        SC.StageFiles(StagedFileType.NonUFS, DirectoryReference.Combine(SC.LocalRoot, "Engine/Plugins/TrueSkyPlugin/Content"), "*.*", StageFilesSearch.TopDirectoryOnly);
+        SC.StageFiles(StagedFileType.NonUFS, DirectoryReference.Combine(SC.LocalRoot, "Engine/Plugins/TrueSkyPlugin/shaderbin", SC.PlatformDir), "*.fxo", StageFilesSearch.TopDirectoryOnly);
+        /// END trueSKY Additional code
+
         // Stage all the build products
         foreach (StageTarget Target in SC.StageTargets)
 		{

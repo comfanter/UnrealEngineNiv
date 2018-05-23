@@ -1,0 +1,24 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "PivotTool",
+  "Description": "",
+  "Category": "StaticMesh",
+  "CreatedBy": "BruceLee",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "EnabledByDefault": true,
+  "SupportURL": "",
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "PivotTool",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ]
+}

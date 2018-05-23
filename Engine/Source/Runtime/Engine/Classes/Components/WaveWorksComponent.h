@@ -36,7 +36,7 @@ WaveWorksComponent.h: WaveWorks related classes.
 */
 
 #pragma once
-
+#include "MeshComponent.h"
 #include "WaveWorksComponent.generated.h"
 
 UCLASS(ClassGroup = Rendering, meta = (BlueprintSpawnableComponent), HideCategories = (Transform, Collision, Base, Object, PhysicsVolume, Lighting, Mobile, Physix))

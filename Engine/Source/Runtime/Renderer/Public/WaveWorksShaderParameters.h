@@ -41,7 +41,7 @@ class FWaveWorksShaderParameters
 {
 public:
 	FWaveWorksShaderParameters() 
-	:	bIsBound(false)
+	:	bIsBound(true)
 	{}
 
 	void Bind(const FShaderParameterMap& ParameterMap, EShaderFrequency Frequency, EShaderParameterFlags Flags = SPF_Optional);

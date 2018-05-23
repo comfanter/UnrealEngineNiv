@@ -34,6 +34,7 @@
 
 #pragma once
 #include "Tickable.h"
+#include "RenderCommandFence.h"
 #include "WaveWorks.generated.h"
 
 UENUM()

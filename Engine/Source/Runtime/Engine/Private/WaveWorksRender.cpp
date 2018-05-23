@@ -28,11 +28,15 @@
 */
 
 #include "WaveWorksRender.h"
+#include "GFSDK_WaveWorks.h"
 #include "WaveWorksResource.h"
 #include "Engine/WaveWorks.h"
 #include "Engine/WaveWorksShorelineCapture.h"
 #include "Engine/TextureRenderTarget2D.h"
+#include "Engine/Texture2D.h"
+#include "SceneManagement.h"
 #include "Components/WaveWorksComponent.h"
+
 
 IMPLEMENT_UNIFORM_BUFFER_STRUCT(FWaveWorksShorelineUniformParameters, TEXT("WaveWorksShorelineParameters"));
 
@@ -94,7 +98,6 @@ FWaveWorksSceneProxy::FWaveWorksSceneProxy(UWaveWorksComponent* InComponent, UWa
 	if (nullptr != WaveWorks)
 	{
 		WaveWorksResource = WaveWorks->GetWaveWorksResource();
-
 		if (WaveWorksResource != nullptr)
 			WaveWorksResource->CustomAddToDeferredUpdateList();
 	}		
@@ -178,20 +181,16 @@ FWaveWorksShorelineUniformBufferRef FWaveWorksSceneProxy::CreateShorelineUniform
 		FPlane(0, 1, 0, 0),
 		FPlane(0, 0, 0, 1));
 
-	float YAxisMultiplier;
-
-	FIntPoint RenderTargetSize(WaveWorks->ShorelineDistanceFieldTexture->GetSurfaceWidth(), WaveWorks->ShorelineDistanceFieldTexture->GetSurfaceHeight());
-	if (RenderTargetSize.X > RenderTargetSize.Y)
+	float YAxisMultiplier = 1.0f;
+	if (WaveWorks->ShorelineDistanceFieldTexture != nullptr)
 	{
-		// if the viewport is wider than it is tall
-		YAxisMultiplier = RenderTargetSize.X / (float)RenderTargetSize.Y;
+		FIntPoint RenderTargetSize(WaveWorks->ShorelineDistanceFieldTexture->GetSurfaceWidth(), WaveWorks->ShorelineDistanceFieldTexture->GetSurfaceHeight());
+		if (RenderTargetSize.X > RenderTargetSize.Y)
+		{
+			// if the viewport is wider than it is tall
+			YAxisMultiplier = RenderTargetSize.X / (float)RenderTargetSize.Y;
+		}
 	}
-	else
-	{
-		// if the viewport is taller than it is wide
-		YAxisMultiplier = 1.0f;
-	}
-
 	check((int32)ERHIZBuffer::IsInverted);
 	const float OrthoWidth = WaveWorks->ShorelineCaptureOrthoSize / 2.0f;
 	const float OrthoHeight = WaveWorks->ShorelineCaptureOrthoSize / 2.0f * YAxisMultiplier;
@@ -261,6 +260,7 @@ void FWaveWorksSceneProxy::GetDynamicMeshElements(const TArray<const FSceneView*
 	if (WaveWorksResource != nullptr)
 	{
 		WaveWorksResource->CustomAddToDeferredUpdateList();
+		if(WaveWorks->bUseShoreline)
 		WaveWorksResource->SetShorelineUniformBuffer(CreateShorelineUniformBuffer());		
 	}
 }

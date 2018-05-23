@@ -1033,6 +1033,7 @@ public:
 				if (nullptr != Shader)
 				{
 					FWaveWorksShaderParameters* WaveWorksShaderParams = Shader->GetWaveWorksShaderParameters();
+					if(WaveWorksShaderParams->ShaderInputMappings.Num())
 					WaveWorksShaderInputMapping[Index] = WaveWorksShaderParams->ShaderInputMappings[Index];
 				}				
 			}
@@ -1118,7 +1119,10 @@ public:
 		// If the current debug view shader modes are allowed, different VS/DS/HS must be used (with only SV_POSITION as PS interpolant).
 		if (!View->Family->UseDebugViewVSDSHS())
 		{
-			VertexShader->SetWaveWorksParameters<FVertexShaderRHIParamRef>(RHICmdList, (FVertexShaderRHIParamRef)VertexShader->GetVertexShader(), *View, WaveWorksResources);
+			if (VertexShader)
+			{
+				VertexShader->SetWaveWorksParameters<FVertexShaderRHIParamRef>(RHICmdList, (FVertexShaderRHIParamRef)VertexShader->GetVertexShader(), *View, WaveWorksResources);
+			}
 
 			if (HullShader)
 			{
@@ -1421,9 +1425,12 @@ public:
 				default:
 					break;
 				}
-
-				FWaveWorksShaderParameters* WaveWorksShaderParams = Shader->GetWaveWorksShaderParameters();
-				QuadTreeShaderInputMapping[Index] = WaveWorksShaderParams->QuadTreeShaderInputMappings[Index];
+				if (Shader)
+				{
+					FWaveWorksShaderParameters* WaveWorksShaderParams = Shader->GetWaveWorksShaderParameters();
+					if (WaveWorksShaderParams->ShaderInputMappings.Num())
+						QuadTreeShaderInputMapping[Index] = WaveWorksShaderParams->QuadTreeShaderInputMappings[Index];
+				}
 			}
 		}
 	}
@@ -1458,6 +1465,7 @@ public:
 				}
 
 				FWaveWorksShaderParameters* WaveWorksShaderParams = Shader->GetWaveWorksShaderParameters();
+				if (WaveWorksShaderParams->ShaderInputMappings.Num())
 				WaveWorksShaderInputMapping[Index] = WaveWorksShaderParams->ShaderInputMappings[Index];
 			}
 		}
@@ -1551,8 +1559,10 @@ public:
 		// If the current debug view shader modes are allowed, different VS/DS/HS must be used (with only SV_POSITION as PS interpolant).
 		if (!View->Family->UseDebugViewVSDSHS())
 		{
-			VertexShader->SetWaveWorksParameters<FVertexShaderRHIParamRef>(RHICmdList, (FVertexShaderRHIParamRef)VertexShader->GetVertexShader(), *View, WaveWorksResources);
-
+			if (VertexShader)
+			{
+				VertexShader->SetWaveWorksParameters<FVertexShaderRHIParamRef>(RHICmdList, (FVertexShaderRHIParamRef)VertexShader->GetVertexShader(), *View, WaveWorksResources);
+			}
 			if (HullShader)
 			{
 				HullShader->SetWaveWorksParameters<FHullShaderRHIParamRef>(RHICmdList, (FHullShaderRHIParamRef)HullShader->GetHullShader(), *View, WaveWorksResources);
@@ -1568,11 +1578,13 @@ public:
 		{
 			PixelShader->SetWaveWorksParameters<FPixelShaderRHIParamRef>(RHICmdList, (FPixelShaderRHIParamRef)PixelShader->GetPixelShader(), *View, WaveWorksResources);
 		}
-
-		FWaveWorksRHIRef WaveWorksRHI = WaveWorksResources->GetWaveWorksRHI();
-		if (WaveWorksRHI)
+		if (WaveWorksResources)
 		{
-			RHICmdList.SetWaveWorksState(WaveWorksRHI, View->ViewMatrices.GetViewMatrix(), WaveWorksShaderInputMapping);
+			FWaveWorksRHIRef WaveWorksRHI = WaveWorksResources->GetWaveWorksRHI();
+			if (WaveWorksRHI)
+			{
+				RHICmdList.SetWaveWorksState(WaveWorksRHI, View->ViewMatrices.GetViewMatrix(), WaveWorksShaderInputMapping);
+			}
 		}
 	}
 

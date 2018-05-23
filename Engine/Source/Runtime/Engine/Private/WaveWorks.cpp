@@ -253,8 +253,12 @@ TStatId UWaveWorks::GetStatId() const
 class FWaveWorksResource* UWaveWorks::GetWaveWorksResource()
 {
 	FWaveWorksResource* Result = NULL;
-	if( WaveWorksResource && WaveWorksResource->IsInitialized() )
+	if (WaveWorksResource)
 	{
+		while (!WaveWorksResource->IsInitialized())
+		{
+			FPlatformProcess::Sleep(0.01);
+		}
 		Result = (FWaveWorksResource*)WaveWorksResource;
 	}
 	return Result;

@@ -44,7 +44,6 @@ void FRenameToolHelper::Rename(ERenameAction NewRenameAction)
 		for (auto ActorIt = SelectionSetCache.CreateIterator(); ActorIt; ++ActorIt)
 		{
 			AActor* Actor = *ActorIt;
-			UE_LOG(LogTemp, Log, TEXT("aaaa"));
 			SetActorNewName(Actor, Index);
 			++Index;
 		}

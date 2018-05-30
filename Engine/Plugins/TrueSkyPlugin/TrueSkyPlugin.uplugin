@@ -1,34 +1,35 @@
 {
-	"FileVersion": 3,
-	"Version": 4,
-	"VersionName": "4.2",
-	"FriendlyName": "TrueSky Plugin",
-	"Description": "trueSKY plugin for real-time sky simulation.",
-	"Category": "Rendering.Custom",
-	"CreatedBy": "Simul Software Ltd.",
-	"CreatedByURL": "http://simul.co/",
-	"DocsURL": "https://docs.simul.co",
-	"MarketplaceURL": "",
-	"SupportURL": "mailto:contact@simul.co",
-	"EngineVersion": "4.18.0",
-	"CanContainContent": true,
-	"Installed": true,
-	"Modules": [
-		{
-			"Name": "TrueSkyPlugin",
-			"Type": "Runtime",
-			"LoadingPhase": "PreDefault",
-			"WhitelistPlatforms": [
-				"Win64",
-				"XboxOne",
-				"PS4",
-				"Switch"
-			]
-		},
-		{
-			"Name": "TrueSkyEditorPlugin",
-			"Type": "Editor",
-			"LoadingPhase": "Default"
-		}
-	]
+  "FileVersion": 3,
+  "Version": 4,
+  "VersionName": "4.2",
+  "FriendlyName": "TrueSky Plugin",
+  "Description": "trueSKY plugin for real-time sky simulation.",
+  "Category": "Rendering.Custom",
+  "CreatedBy": "Simul Software Ltd.",
+  "CreatedByURL": "http://simul.co/",
+  "DocsURL": "https://docs.simul.co",
+  "MarketplaceURL": "",
+  "SupportURL": "mailto:contact@simul.co",
+  "EngineVersion": "4.18.3",
+  "CanContainContent": true,
+  "EnabledByDefault": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "TrueSkyPlugin",
+      "Type": "Runtime",
+      "LoadingPhase": "PreDefault",
+      "WhitelistPlatforms": [
+        "Win64",
+        "XboxOne",
+        "PS4",
+        "Switch"
+      ]
+    },
+    {
+      "Name": "TrueSkyEditorPlugin",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    }
+  ]
 }

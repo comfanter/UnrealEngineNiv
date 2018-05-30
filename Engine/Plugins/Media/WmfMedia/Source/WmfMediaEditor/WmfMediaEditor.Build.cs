@@ -6,7 +6,8 @@ namespace UnrealBuildTool.Rules
 	{
 		public WmfMediaEditor(ReadOnlyTargetRules Target) : base(Target)
 		{
-			PrivateDependencyModuleNames.AddRange(
+            bEnableExceptions = true;
+            PrivateDependencyModuleNames.AddRange(
 				new string[] {
 					"Core",
 					"CoreUObject",

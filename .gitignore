@@ -230,6 +230,16 @@ BuildGraph.Automation.xml
 #RenameToolPlugins
 !/Engine/Plugins/File/RenameTool/Resources/**
 
+#PivotTool
+!/Engine/Plugins/PivotTool/Resources/**
+!/Engine/Plugins/PivotTool/Content/**
+
+#TrueSkyPlugin
+!/Engine/Plugins/TrueSkyPlugin/**
+/Engine/Plugins/TrueSkyPlugin/Intermediate
+/Engine/Plugins/TrueSkyPlugin/Binaries
+!Engine/Binaries/ThirdParty/Simul/**
+
 Engine/Plugins/GameWorks/NvFlow/Intermediate/**
 
 #Files about PhysX(It will download when run setup.bat)

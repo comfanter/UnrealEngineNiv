@@ -901,7 +901,7 @@ FTrueSkyEditorPlugin::SEditorInstance* FTrueSkyEditorPlugin::CreateEditorInstanc
 				;
 			EditorInstance.EditorWindow->SetOnWindowClosed( FOnWindowClosed::CreateRaw(this, &FTrueSkyEditorPlugin::OnMainWindowClosed) );
 			FSlateApplication::Get().AddWindowAsNativeChild( EditorInstance.EditorWindow.ToSharedRef(), ParentWindow.ToSharedRef() );
-		//	EditorInstance.EditorWindow->ReshapeWindow( EditorInstance.EditorWindow->GetPositionInScreen(), FVector2D(800.0f, 600.0f) );
+			EditorInstance.EditorWindow->ReshapeWindow( EditorInstance.EditorWindow->GetPositionInScreen(), FVector2D(800.0f, 600.0f) );
 
 			EditorInstance.EditorWindowHWND = GetSWindowHWND(EditorInstance.EditorWindow);
 			if ( EditorInstance.EditorWindowHWND )
@@ -911,7 +911,7 @@ FTrueSkyEditorPlugin::SEditorInstance* FTrueSkyEditorPlugin::CreateEditorInstanc
 
 				const FVector2D ClientSize = EditorInstance.EditorWindow->GetClientSizeInScreen();
 				const FMargin Margin = EditorInstance.EditorWindow->GetWindowBorderSize();
-			//	GetWindowRect(EditorInstance.EditorWindowHWND, &ParentRect);
+				//GetWindowRect(EditorInstance.EditorWindowHWND, &ParentRect);
 				EditorInstance.EditorWindow->Restore();
 				FSlateRect winRect=EditorInstance.EditorWindow->GetClientRectInScreen();
 				RECT ParentRect;
